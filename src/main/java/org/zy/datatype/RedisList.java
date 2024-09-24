@@ -1,6 +1,5 @@
 package org.zy.datatype;
 
-import lombok.AllArgsConstructor;
 import lombok.ToString;
 
 import java.util.ArrayList;
@@ -16,14 +15,17 @@ import java.util.List;
  * @date 2023/6/12 15:00
  */
 @ToString
-@AllArgsConstructor
-public class RedisList implements RedisData {
-    private final LinkedList<String> list;
+public class RedisList extends RedisData {
 
-    private long timeout;
+    private final LinkedList<String> list;
 
     public RedisList(LinkedList<String> list) {
         this(list, -1L);
+    }
+
+    public RedisList(LinkedList<String> list, long timeout) {
+        this.list = new LinkedList<>();
+        this.timeout = timeout;
     }
 
     /* LPUSH <key> <element> [<element> ...] */
@@ -75,13 +77,4 @@ public class RedisList implements RedisData {
         return pop;
     }
 
-    @Override
-    public long getTimeout() {
-        return timeout;
-    }
-
-    @Override
-    public void setTimeout(long timeout) {
-        this.timeout = timeout;
-    }
 }

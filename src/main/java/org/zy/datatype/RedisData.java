@@ -8,9 +8,16 @@ package org.zy.datatype;
  * @author ZPY
  * @date 2023/6/8 21:33
  */
-public interface RedisData {
 
-    long getTimeout();
+public abstract class RedisData {
 
-    void setTimeout(long timeout);
+    protected long timeout;
+
+    public long getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(long timeout) {
+        this.timeout = timeout;
+    }
 }

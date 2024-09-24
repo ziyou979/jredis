@@ -1,6 +1,7 @@
 package org.zy.datatype;
 
 import lombok.ToString;
+import org.zy.util.NumberUtil;
 
 import java.math.BigDecimal;
 
@@ -13,10 +14,9 @@ import java.math.BigDecimal;
  * @date 2023/6/9 14:36
  */
 @ToString
-public class RedisString implements RedisData {
-    private final StringBuilder str;
+public class RedisString extends RedisData {
 
-    private long timeout;
+    private final StringBuilder str;
 
     public RedisString(String str) {
         this(str, -1L);
@@ -38,7 +38,8 @@ public class RedisString implements RedisData {
     /* SET key value [NX] [XX] [KEEPTTL] [GET] [EX <seconds>] [PX <milliseconds>]
      *     [EXAT <seconds-timestamp>][PXAT <milliseconds-timestamp>] */
     public void set(String str) {
-        this.str.setLength(0); // 利用StringBuilder重置的效率比新建对象高
+        // 利用StringBuilder重置的效率比新建对象高
+        this.str.setLength(0);
         this.str.append(str);
     }
 
@@ -47,6 +48,9 @@ public class RedisString implements RedisData {
     }
 
     public String incrBy(String val, boolean incr) {
+        if (NumberUtil.isNotNumber(val)) {
+            throw new IllegalArgumentException("ERR value is not an integer or out of range");
+        }
         BigDecimal num = new BigDecimal(str.toString());
         BigDecimal value = new BigDecimal(val);
         return incr ? num.add(value).toPlainString() : num.subtract(value).toPlainString();
@@ -56,13 +60,4 @@ public class RedisString implements RedisData {
         return str.append(s).toString();
     }
 
-    @Override
-    public long getTimeout() {
-        return timeout;
-    }
-
-    @Override
-    public void setTimeout(long timeout) {
-        this.timeout = timeout;
-    }
 }
