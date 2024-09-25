@@ -59,6 +59,7 @@ public class RedisHash extends RedisData {
     }
 
     public static void main(String[] args) {
+        String[] del = new String[1000000];
         RedisHash hash = new RedisHash();
         hash.hset("a", "1");
         System.out.println(hash.hdel("a", "b"));
