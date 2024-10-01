@@ -37,5 +37,38 @@ public class JredisException extends RuntimeException {
     public static JredisException invalidArgument(String command) {
         return new JredisException(1002, JredisExceptionEnum.INVALID_ARGUMENT.getReason(command));
     }
+
+    public static JredisException invalidType() {
+        return new JredisException(1003, JredisExceptionEnum.INVALID_TYPE.getReason());
+    }
+
+    public static JredisException invalidInt() {
+        return new JredisException(1004, JredisExceptionEnum.INVALID_INT.getReason());
+    }
+
+    public static JredisException invalidTimeout() {
+        return new JredisException(1005, JredisExceptionEnum.INVALID_TIMEOUT.getReason());
+    }
+
+    public static JredisException invalidIndex() {
+        return new JredisException(1006, JredisExceptionEnum.INVALID_INDEX.getReason());
+    }
+
+
+    public static JredisException invalidLength() {
+        return new JredisException(1007, JredisExceptionEnum.INVALID_LENGTH.getReason());
+    }
+
+    public static JredisException invalidValue() {
+        return new JredisException(1008, JredisExceptionEnum.INVALID_VALUE.getReason());
+    }
+
+    public static JredisException invalidValueType() {
+        return new JredisException(1009, JredisExceptionEnum.INVALID_VALUE_TYPE.getReason());
+    }
+
+    public static JredisException invalidValueLength() {
+        return new JredisException(1010, JredisExceptionEnum.INVALID_VALUE_LENGTH.getReason());
+    }
 }
 

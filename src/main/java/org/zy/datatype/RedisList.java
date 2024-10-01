@@ -29,7 +29,7 @@ public class RedisList extends RedisData {
     }
 
     /* LPUSH <key> <element> [<element> ...] */
-    public long lpush(String... elements) {
+    public long lPush(String... elements) {
         for (String element : elements) {
             list.addFirst(element);
         }
@@ -37,7 +37,7 @@ public class RedisList extends RedisData {
     }
 
     /* RPUSH <key> <element> [<element> ...] */
-    public long rpush(String... elements) {
+    public long rPush(String... elements) {
         for (String element : elements) {
             list.addLast(element);
         }
@@ -45,17 +45,17 @@ public class RedisList extends RedisData {
     }
 
     /* LRANGE <key> <start> <stop> */
-    public List<String> lrange(long start, long stop) {
+    public List<String> lRange(long start, long stop) {
         return list.subList((int) start, (int) stop);
     }
 
     /* LPOP <key> */
-    public String lpop() {
+    public String lPop() {
         return list.pollFirst();
     }
 
     /* LPOP <key> count */
-    public List<String> lpop(long count) {
+    public List<String> lPop(long count) {
         List<String> pop = new ArrayList<>((int) count);
         for (int i = 0; i < count; i++) {
             pop.add(list.pollFirst());
@@ -64,12 +64,12 @@ public class RedisList extends RedisData {
     }
 
     /* RPOP <key> */
-    public String rpop() {
+    public String rPop() {
         return list.pollLast();
     }
 
     /* RPOP <key> count */
-    public List<String> rpop(long count) {
+    public List<String> rPop(long count) {
         List<String> pop = new ArrayList<>((int) count);
         for (int i = 0; i < count; i++) {
             pop.add(list.pollLast());

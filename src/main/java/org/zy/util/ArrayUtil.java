@@ -47,12 +47,12 @@ public class ArrayUtil {
         strBuf.append(']');
     }
 
-    static void booleanArrayAppend(StringBuilder strBuf, boolean[] a) {
+    static void booleanArrayAppend(StringBuilder strBuf, boolean[] array) {
         strBuf.append('[');
-        int len = a.length;
+        int len = array.length;
 
         for (int i = 0; i < len; ++i) {
-            strBuf.append(a[i]);
+            strBuf.append(array[i]);
             if (i != len - 1) {
                 strBuf.append(", ");
             }
@@ -61,12 +61,12 @@ public class ArrayUtil {
         strBuf.append(']');
     }
 
-    static void byteArrayAppend(StringBuilder strBuf, byte[] a) {
+    static void byteArrayAppend(StringBuilder strBuf, byte[] array) {
         strBuf.append('[');
-        int len = a.length;
+        int len = array.length;
 
         for (int i = 0; i < len; ++i) {
-            strBuf.append(a[i]);
+            strBuf.append(array[i]);
             if (i != len - 1) {
                 strBuf.append(", ");
             }
@@ -75,12 +75,12 @@ public class ArrayUtil {
         strBuf.append(']');
     }
 
-    static void charArrayAppend(StringBuilder strBuf, char[] a) {
+    static void charArrayAppend(StringBuilder strBuf, char[] array) {
         strBuf.append('[');
-        int len = a.length;
+        int len = array.length;
 
         for (int i = 0; i < len; ++i) {
-            strBuf.append(a[i]);
+            strBuf.append(array[i]);
             if (i != len - 1) {
                 strBuf.append(", ");
             }
@@ -89,12 +89,12 @@ public class ArrayUtil {
         strBuf.append(']');
     }
 
-    static void shortArrayAppend(StringBuilder strBuf, short[] a) {
+    static void shortArrayAppend(StringBuilder strBuf, short[] array) {
         strBuf.append('[');
-        int len = a.length;
+        int len = array.length;
 
         for (int i = 0; i < len; ++i) {
-            strBuf.append(a[i]);
+            strBuf.append(array[i]);
             if (i != len - 1) {
                 strBuf.append(", ");
             }
@@ -103,12 +103,12 @@ public class ArrayUtil {
         strBuf.append(']');
     }
 
-    static void intArrayAppend(StringBuilder strBuf, int[] a) {
+    static void intArrayAppend(StringBuilder strBuf, int[] array) {
         strBuf.append('[');
-        int len = a.length;
+        int len = array.length;
 
         for (int i = 0; i < len; ++i) {
-            strBuf.append(a[i]);
+            strBuf.append(array[i]);
             if (i != len - 1) {
                 strBuf.append(", ");
             }
@@ -117,12 +117,12 @@ public class ArrayUtil {
         strBuf.append(']');
     }
 
-    static void longArrayAppend(StringBuilder strBuf, long[] a) {
+    static void longArrayAppend(StringBuilder strBuf, long[] array) {
         strBuf.append('[');
-        int len = a.length;
+        int len = array.length;
 
         for (int i = 0; i < len; ++i) {
-            strBuf.append(a[i]);
+            strBuf.append(array[i]);
             if (i != len - 1) {
                 strBuf.append(", ");
             }
@@ -131,12 +131,12 @@ public class ArrayUtil {
         strBuf.append(']');
     }
 
-    static void floatArrayAppend(StringBuilder strBuf, float[] a) {
+    static void floatArrayAppend(StringBuilder strBuf, float[] array) {
         strBuf.append('[');
-        int len = a.length;
+        int len = array.length;
 
         for (int i = 0; i < len; ++i) {
-            strBuf.append(a[i]);
+            strBuf.append(array[i]);
             if (i != len - 1) {
                 strBuf.append(", ");
             }
@@ -145,12 +145,12 @@ public class ArrayUtil {
         strBuf.append(']');
     }
 
-    static void doubleArrayAppend(StringBuilder strBuf, double[] a) {
+    static void doubleArrayAppend(StringBuilder strBuf, double[] array) {
         strBuf.append('[');
-        int len = a.length;
+        int len = array.length;
 
         for (int i = 0; i < len; ++i) {
-            strBuf.append(a[i]);
+            strBuf.append(array[i]);
             if (i != len - 1) {
                 strBuf.append(", ");
             }

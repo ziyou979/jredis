@@ -1,6 +1,7 @@
 package org.zy.datatype;
 
 import lombok.ToString;
+import org.zy.exception.JredisException;
 import org.zy.util.NumberUtil;
 
 import java.math.BigDecimal;
@@ -31,7 +32,25 @@ public class RedisString extends RedisData {
         return str.toString();
     }
 
-    public String getrange(long start, long end) {
+    public String getRange(long start, long end) {
+        int length = str.length();
+        // 支持负数索引，负数索引代表从后往前数
+        if (start < 0) {
+            start += length;
+        }
+        if (end < 0) {
+            end += length;
+        }
+        // 允许索引超出字符串长度
+        if (start >= length || start > end) {
+            return "";
+        }
+        if (end >= length) {
+            end = length - 1;
+        }
+        // 确保 start 和 end 在有效范围内
+        start = Math.max(start, 0);
+        end = Math.min(end, length - 1);
         return str.substring((int) start, (int) end + 1);
     }
 
@@ -43,13 +62,13 @@ public class RedisString extends RedisData {
         this.str.append(str);
     }
 
-    public int strlen() {
+    public int strLen() {
         return str.length();
     }
 
     public String incrBy(String val, boolean incr) {
         if (NumberUtil.isNotNumber(val)) {
-            throw new IllegalArgumentException("ERR value is not an integer or out of range");
+            throw JredisException.invalidInt();
         }
         BigDecimal num = new BigDecimal(str.toString());
         BigDecimal value = new BigDecimal(val);
@@ -58,6 +77,12 @@ public class RedisString extends RedisData {
 
     public String append(String s) {
         return str.append(s).toString();
+    }
+
+    public static void main(String[] args) {
+        String str = "123456789";
+        RedisString redisString = new RedisString(str);
+        System.out.println(redisString.getRange(-12, 1));
     }
 
 }

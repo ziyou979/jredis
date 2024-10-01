@@ -12,6 +12,7 @@ public enum JredisExceptionEnum {
     INVALID_COMMAND("ERR unknown command '{}'"),
     INVALID_ARGUMENT("ERR wrong number of arguments for '{}' command"),
     INVALID_TYPE("WRONGTYPE Operation against a key holding the wrong kind of value"),
+    INVALID_INT("ERR value is not an integer or out of range"),
     INVALID_TIMEOUT("ERR invalid expire time in setTimeout"),
     INVALID_INDEX("ERR index out of range"),
     INVALID_LENGTH("ERR invalid length"),

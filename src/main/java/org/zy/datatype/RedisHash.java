@@ -16,7 +16,7 @@ public class RedisHash extends RedisData {
     /**
      * HSET key field value
      */
-    public int hset(String field, String value) {
+    public int hSet(String field, String value) {
         boolean exists = map.containsKey(field);
         boolean insert = Objects.isNull(map.put(field, value));
         return exists && insert ? 1 : 0;
@@ -25,7 +25,7 @@ public class RedisHash extends RedisData {
     /**
      * HDEL key field [field ...]
      */
-    public int hdel(String... fields) {
+    public int hDel(String... fields) {
         if (ArrayUtil.isEmpty(fields)) {
             return 0;
         }
@@ -42,7 +42,7 @@ public class RedisHash extends RedisData {
     /**
      * HEXISTS key field
      */
-    public int hexists(String field) {
+    public int hExists(String field) {
         return map.containsKey(field) ? 1 : 0;
     }
 
@@ -50,19 +50,19 @@ public class RedisHash extends RedisData {
         return map.values();
     }
 
-    public String hget(String field) {
+    public String hGet(String field) {
         return map.get(field);
     }
 
-    public long hlen() {
+    public long hLen() {
         return map.size();
     }
 
     public static void main(String[] args) {
         String[] del = new String[1000000];
         RedisHash hash = new RedisHash();
-        hash.hset("a", "1");
-        System.out.println(hash.hdel("a", "b"));
+        hash.hSet("a", "1");
+        System.out.println(hash.hDel("a", "b"));
     }
 
 }
