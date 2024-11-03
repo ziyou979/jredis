@@ -26,6 +26,13 @@ public class ArrayUtil {
         return Objects.isNull(array) || array.length == 0;
     }
 
+    public static <T> T getFirst(T[] array) {
+        if (isEmpty(array)) {
+            return null;
+        }
+        return array[0];
+    }
+
     static void objectArrayAppend(StringBuilder strBuf, Object[] a, Map<Object[], Object> seenMap) {
         strBuf.append('[');
         if (!seenMap.containsKey(a)) {

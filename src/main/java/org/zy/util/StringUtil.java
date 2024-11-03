@@ -30,6 +30,14 @@ public class StringUtil {
         return !isEmpty(str);
     }
 
+    public static boolean isBlank(String str) {
+        return Objects.isNull(str) || str.isBlank();
+    }
+
+    public static boolean isNotBlank(String str) {
+        return !isBlank(str);
+    }
+
     /**
      * 格式化字符串，占位符为{}
      *
