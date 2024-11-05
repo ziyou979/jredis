@@ -11,10 +11,10 @@ import org.zy.resp.data.SimpleString;
 import java.util.List;
 
 @ToString
-public class Auth implements RedisCommand {
+public class Ping implements RedisCommand {
     @Override
     public CommandType type() {
-        return CommandType.AUTH;
+        return CommandType.PING;
     }
 
     @Override
@@ -24,7 +24,6 @@ public class Auth implements RedisCommand {
 
     @Override
     public void handle(ChannelHandlerContext ctx, List<RedisDb> redisDbs) {
-        ctx.writeAndFlush(SimpleString.OK);
+        ctx.writeAndFlush(new SimpleString("PONG"));
     }
-
 }

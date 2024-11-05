@@ -27,6 +27,7 @@ public class CommandFactory {
             throw JredisException.invalidCommand(array.toString());
         }
 
+        // 不区分命令大小写
         String commandCode = bulkString.getContent().toLowerCase(Locale.ROOT);
         RedisCommand redisCommand = CommandType.getByCode(commandCode).newInstance();
         redisCommand.setContent(content);

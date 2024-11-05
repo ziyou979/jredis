@@ -29,7 +29,7 @@ public class Error implements Resp {
     @Override
     public void encode(ByteBuf buffer) {
         buffer.writeByte(RespType.ERROR.getCode());
-        log.error(content);
+        log.error("异常响应{}", content);
         buffer.writeBytes(content.getBytes(StandardCharsets.UTF_8));
         buffer.writeBytes(RespType.CRLF.getCodes());
 

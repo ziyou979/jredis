@@ -11,8 +11,8 @@ public class KqueueChannelOption extends AbstractChannelOption<KQueueEventLoopGr
     }
 
     public KqueueChannelOption() {
-        super(new KQueueEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("kqueue-boss-")),
-                new KQueueEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("kqueue-selector-")));
+        super(new KQueueEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("kqueue-boss")),
+                new KQueueEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("kqueue-selector")));
     }
 
     @Override

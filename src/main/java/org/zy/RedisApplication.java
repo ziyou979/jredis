@@ -2,22 +2,22 @@ package org.zy;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
-import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import io.netty.util.concurrent.EventExecutorGroup;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.zy.command.CommandDecoder;
-import org.zy.command.CommandHandler;
+import org.zy.netty.handler.CommandDecoder;
+import org.zy.netty.handler.CommandHandler;
 import org.zy.factory.ChannelOptionFactory;
-import org.zy.factory.NamedThreadFactory;
 import org.zy.netty.channel.ChannelOption;
 import org.zy.redis.RedisDb;
-import org.zy.resp.RespEncoder;
+import org.zy.netty.handler.RespEncoder;
 import org.zy.util.PropertiesUtil;
 
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.netty.channel.ChannelOption.*;
 
@@ -32,18 +32,19 @@ import static io.netty.channel.ChannelOption.*;
 @Slf4j
 public class RedisApplication {
 
-    private final RedisDb redisDb = new RedisDb();
+    private final List<RedisDb> redisDbs;
 
     private final ServerBootstrap serverBootstrap = new ServerBootstrap();
-
-    private final EventExecutorGroup redisExecutor;
 
     private final ChannelOption channelOption;
 
     public RedisApplication() {
         channelOption = ChannelOptionFactory.create();
-        // 单线程
-        redisExecutor = new NioEventLoopGroup(1, NamedThreadFactory.newThreadFactory("redis-main"));
+        redisDbs = new ArrayList<>(PropertiesUtil.getDatabases());
+        // 初始化数据库列表，lazy 模式，使用时才真正实例化
+        for (int i = 0; i < PropertiesUtil.getDatabases(); i++) {
+            redisDbs.add(null);
+        }
     }
 
 
@@ -68,20 +69,21 @@ public class RedisApplication {
                 // 初始化子通道处理器
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
-                    protected void initChannel(SocketChannel socketChannel) {
+                    protected void initChannel(@NonNull SocketChannel socketChannel) {
                         ChannelPipeline channelPipeline = socketChannel.pipeline();
                         channelPipeline.addLast(
                                 new RespEncoder(),
                                 // todo aof
-                                new CommandDecoder()
+                                new CommandDecoder(),
+                                new CommandHandler(redisDbs)
                         );
-                        // 主线程
-                        channelPipeline.addLast(redisExecutor, new CommandHandler(redisDb));
                     }
                 });
         try {
-            ChannelFuture sync = serverBootstrap.bind().sync().channel().closeFuture().sync();
+            ChannelFuture sync = serverBootstrap.bind().sync();
             log.info("RedisApplication.start redis 启动成功，IP 地址：{}", sync.channel().localAddress());
+            // 防止虚拟线程直接退出
+            sync.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             log.error("RedisApplication.start redis 服务启动异常", e);
         }
@@ -92,7 +94,6 @@ public class RedisApplication {
              EventLoopGroup selectors = channelOption.selectors()) {
             boss.shutdownGracefully();
             selectors.shutdownGracefully();
-            redisExecutor.shutdownGracefully();
         } catch (Exception e) {
             log.error("RedisApplication.close redis 服务关闭异常", e);
         }

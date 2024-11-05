@@ -4,8 +4,11 @@ import io.netty.buffer.ByteBuf;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.zy.resp.RespDecoderFactory;
+import org.zy.factory.RespDecoderFactory;
 import org.zy.resp.RespType;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 /**
  * <p>
@@ -24,11 +27,17 @@ public class Array implements Resp {
 
     @Override
     public void encode(ByteBuf buffer) {
+        buffer.writeByte(RespType.ARRAY.getCode());
         int len = content.length;
-        buffer.writeByte(len);
+        buffer.writeBytes(String.valueOf(len).getBytes(StandardCharsets.UTF_8));
         buffer.writeBytes(RespType.CRLF.getCodes());
         for (Resp resp : content) {
-            resp.encode(buffer);
+            if (Objects.isNull(resp)) {
+                buffer.writeBytes(RespType.NULL.getCodes());
+                buffer.writeBytes(RespType.CRLF.getCodes());
+            } else {
+                resp.encode(buffer);
+            }
         }
     }
 

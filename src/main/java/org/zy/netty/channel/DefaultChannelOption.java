@@ -11,8 +11,8 @@ public class DefaultChannelOption extends AbstractChannelOption<DefaultEventLoop
     }
 
     public DefaultChannelOption() {
-        super(new DefaultEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("default-boss-")),
-                new DefaultEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("default-selector-")));
+        super(new DefaultEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("default-boss")),
+                new DefaultEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("default-selector")));
     }
 
     @Override

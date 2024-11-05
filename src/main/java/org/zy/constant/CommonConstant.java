@@ -16,11 +16,6 @@ public class CommonConstant {
             'Y', 'Z'
     };
 
-    /**
-     * 当前服务器可使用的CPU核数
-     */
-    public static final int CPUS = Runtime.getRuntime().availableProcessors();
-
     public static final String CRLF = "\r\n";
 
     /**

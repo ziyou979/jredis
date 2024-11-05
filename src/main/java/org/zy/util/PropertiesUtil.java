@@ -41,6 +41,15 @@ public class PropertiesUtil {
         return port;
     }
 
+    public static int getDatabases() {
+        String database = getProperties().getProperty("databases");
+        try {
+            return Integer.parseInt(database);
+        } catch (NumberFormatException e) {
+            return 16;
+        }
+    }
+
     private static Properties getProperties(String propertiesName) {
         Properties prop = new Properties();
         try (InputStream input = PropertiesUtil.class.getResourceAsStream(propertiesName)) {

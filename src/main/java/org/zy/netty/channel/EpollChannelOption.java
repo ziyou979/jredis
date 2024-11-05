@@ -11,8 +11,8 @@ public class EpollChannelOption extends AbstractChannelOption<EpollEventLoopGrou
     }
 
     public EpollChannelOption() {
-        super(new EpollEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("epoll-boss-")),
-                new EpollEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("epoll-selector-")));
+        super(new EpollEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("epoll-boss")),
+                new EpollEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("epoll-selector")));
     }
 
     @Override

@@ -33,7 +33,7 @@ public class BulkString implements Resp {
             buffer.writeBytes(RespType.CRLF.getCodes());
         } else {
             byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
-            buffer.writeByte(bytes.length);
+            buffer.writeBytes(buffer.writeBytes(String.valueOf(bytes.length).getBytes(StandardCharsets.UTF_8)));
             buffer.writeBytes(RespType.CRLF.getCodes());
             buffer.writeBytes(bytes);
             buffer.writeBytes(RespType.CRLF.getCodes());

@@ -11,8 +11,8 @@ public class NioChannelOption extends AbstractChannelOption<NioEventLoopGroup> {
     }
 
     public NioChannelOption() {
-        super(new NioEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("nio-boss-")),
-                new NioEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("nio-selector-")));
+        super(new NioEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("nio-boss")),
+                new NioEventLoopGroup(NamedThreadFactory.newVirtualThreadFactory("nio-selector")));
     }
 
     @Override

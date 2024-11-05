@@ -58,6 +58,6 @@ public class NamedThreadFactory implements ThreadFactory {
     }
 
     public static ThreadFactory newVirtualThreadFactory(String prefix) {
-        return Thread.ofVirtual().name(prefix + "-virtualThread-", 0).factory();
+        return Thread.ofVirtual().name(prefix + "-virtual-thread-", 1).factory();
     }
 }

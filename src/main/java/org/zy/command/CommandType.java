@@ -1,8 +1,7 @@
 package org.zy.command;
 
 import lombok.Getter;
-import org.zy.command.impl.Auth;
-import org.zy.command.impl.Info;
+import org.zy.command.impl.*;
 import org.zy.exception.JredisException;
 
 import java.util.HashMap;
@@ -19,8 +18,12 @@ import java.util.function.Supplier;
  * @date 2023/6/13 15:42
  */
 public enum CommandType {
-    AUTH("auth", "连接鉴权", Auth::new),
+    AUTH("auth", "用户鉴权", Auth::new),
+    CLIENT("client", "客户端连接", Client::new),
+    CONFIG("config", "配置", Config::new),
     INFO("info", "获取Redis信息", Info::new),
+    PING("ping", "PING", Ping::new),
+    SCAN("scan", "DB扫描", Scan::new),
 
     ;
 
