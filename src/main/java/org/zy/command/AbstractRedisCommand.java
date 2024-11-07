@@ -19,8 +19,8 @@ public abstract class AbstractRedisCommand implements RedisCommand {
         this.resp = resp;
     }
 
-    public String getCommandInfo(int index) {
-        index = Math.min(index, resp.length);
+    protected String getCommandInfo(int index) {
+        // 越界异常交给后续编码器处理
         BulkString bulkString = ObjectUtil.cast(resp[index]);
         if (Objects.isNull(bulkString)) {
             throw JredisException.invalidArgument(type().getCode());

@@ -33,7 +33,9 @@ public class RespEncoder extends MessageToByteEncoder<Resp> {
             }
             log.debug("encode 编码数据完成：{}，traceId：{}", out.toString(StandardCharsets.UTF_8), TraceUtil.getTraceId());
         } catch (Exception e) {
-            ctx.close();
+            out.writeBytes(RespType.ERROR.getCodes());
+            out.writeBytes("Err system error".getBytes(StandardCharsets.UTF_8));
+            out.writeBytes(RespType.CRLF.getCodes());
             log.error("数据类编码时发生异常：{}，traceId：{}", e.getMessage(), TraceUtil.getTraceId());
         }
     }

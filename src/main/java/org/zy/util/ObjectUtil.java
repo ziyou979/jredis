@@ -26,4 +26,16 @@ public class ObjectUtil {
         }
     }
 
+    public static boolean hasNull(Object... objs) {
+        if (ArrayUtil.isEmpty(objs)) {
+            return true;
+        }
+        for (Object obj : objs) {
+            if (Objects.isNull(obj)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

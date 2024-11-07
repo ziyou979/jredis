@@ -11,13 +11,11 @@ import org.zy.netty.handler.CommandDecoder;
 import org.zy.netty.handler.CommandHandler;
 import org.zy.factory.ChannelOptionFactory;
 import org.zy.netty.channel.ChannelOption;
-import org.zy.redis.RedisDb;
 import org.zy.netty.handler.RespEncoder;
+import org.zy.redis.RedisDbList;
 import org.zy.util.PropertiesUtil;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.List;
 
 import static io.netty.channel.ChannelOption.*;
 
@@ -32,7 +30,7 @@ import static io.netty.channel.ChannelOption.*;
 @Slf4j
 public class RedisApplication {
 
-    private final List<RedisDb> redisDbs;
+    private final RedisDbList redisDbs;
 
     private final ServerBootstrap serverBootstrap = new ServerBootstrap();
 
@@ -40,11 +38,7 @@ public class RedisApplication {
 
     public RedisApplication() {
         channelOption = ChannelOptionFactory.create();
-        redisDbs = new ArrayList<>(PropertiesUtil.getDatabases());
-        // 初始化数据库列表，lazy 模式，使用时才真正实例化
-        for (int i = 0; i < PropertiesUtil.getDatabases(); i++) {
-            redisDbs.add(null);
-        }
+        redisDbs = new RedisDbList(PropertiesUtil.getDatabases());
     }
 
 

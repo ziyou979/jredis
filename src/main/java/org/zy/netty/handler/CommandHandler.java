@@ -4,17 +4,17 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.zy.command.RedisCommand;
-import org.zy.redis.RedisDb;
+import org.zy.exception.JredisException;
+import org.zy.redis.RedisDbList;
+import org.zy.resp.data.Error;
 import org.zy.util.TraceUtil;
-
-import java.util.List;
 
 @Slf4j
 public class CommandHandler extends SimpleChannelInboundHandler<RedisCommand> {
 
-    private final List<RedisDb> redisDbs;
+    private final RedisDbList redisDbs;
 
-    public CommandHandler(List<RedisDb> redisDbs) {
+    public CommandHandler(RedisDbList redisDbs) {
         this.redisDbs = redisDbs;
     }
 
@@ -27,7 +27,12 @@ public class CommandHandler extends SimpleChannelInboundHandler<RedisCommand> {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         log.error("CommandHandler.exceptionCaught 发生异常", cause);
-        ctx.close();
+        if (cause instanceof JredisException jredisException) {
+            ctx.writeAndFlush(new Error(jredisException.getReason()));
+        } else {
+            // 非法异常
+            ctx.writeAndFlush(new Error("Err system error"));
+        }
     }
 
     @Override

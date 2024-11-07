@@ -11,6 +11,7 @@ import io.netty.buffer.ByteBuf;
  * @date 2023/6/11 16:25
  */
 public class UnsupportedProtocolError extends Error {
+
     public UnsupportedProtocolError() {
         super("Unsupported Protocol");
     }

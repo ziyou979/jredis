@@ -1,10 +1,8 @@
 package org.zy.command;
 
 import io.netty.channel.ChannelHandlerContext;
-import org.zy.redis.RedisDb;
+import org.zy.redis.RedisDbList;
 import org.zy.resp.data.Resp;
-
-import java.util.List;
 
 /**
  * <p>
@@ -25,7 +23,7 @@ public interface RedisCommand {
      */
     void setContent(Resp[] resp);
 
-    void handle(ChannelHandlerContext ctx, List<RedisDb> redisDbs);
+    void handle(ChannelHandlerContext ctx, RedisDbList redisDbs);
 
     /**
      * 是否需要记录到aof文件

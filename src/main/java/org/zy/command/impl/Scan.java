@@ -5,6 +5,7 @@ import lombok.ToString;
 import org.zy.command.CommandType;
 import org.zy.command.RedisCommand;
 import org.zy.redis.RedisDb;
+import org.zy.redis.RedisDbList;
 import org.zy.resp.data.Array;
 import org.zy.resp.data.BulkString;
 import org.zy.resp.data.Resp;
@@ -25,7 +26,7 @@ public class Scan implements RedisCommand {
     }
 
     @Override
-    public void handle(ChannelHandlerContext ctx, List<RedisDb> redisDbs) {
+    public void handle(ChannelHandlerContext ctx, RedisDbList redisDbs) {
         int dbNum = PropertiesUtil.getDatabases();
         // 返回结果数量为数据库的数量*2
         Resp[] resp = new Resp[dbNum << 1];

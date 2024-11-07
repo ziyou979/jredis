@@ -23,6 +23,8 @@ import java.util.Objects;
 @AllArgsConstructor
 public class BulkString implements Resp {
 
+    public static final BulkString NULL = new BulkString(null);
+
     private String content;
 
     @Override

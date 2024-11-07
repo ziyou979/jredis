@@ -5,7 +5,7 @@ import lombok.ToString;
 import org.zy.command.AbstractRedisCommand;
 import org.zy.command.CommandType;
 import org.zy.exception.JredisException;
-import org.zy.redis.RedisDb;
+import org.zy.redis.RedisDbList;
 import org.zy.resp.data.Array;
 import org.zy.resp.data.BulkString;
 import org.zy.resp.data.Resp;
@@ -37,7 +37,7 @@ public class Config extends AbstractRedisCommand {
     }
 
     @Override
-    public void handle(ChannelHandlerContext ctx, List<RedisDb> redisDbs) {
+    public void handle(ChannelHandlerContext ctx, RedisDbList redisDbs) {
         List<BulkString> res = new ArrayList<>();
         Properties properties = PropertiesUtil.getProperties();
         if (paramEquals("databases")) {

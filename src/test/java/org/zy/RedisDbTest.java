@@ -20,7 +20,7 @@ public class RedisDbTest {
             redisDb.put("key" + i, new RedisString("value" + i, System.currentTimeMillis() + 3000));
         }
         System.out.println(redisDb.keys());
-        System.out.println(redisDb.exits("key33"));
+        System.out.println(redisDb.exists("key33"));
         System.out.println(redisDb.get("key50"));
         System.out.println(redisDb.del("key40", "key50"));
         redisDb.put("key1", new RedisString("永不过期"));

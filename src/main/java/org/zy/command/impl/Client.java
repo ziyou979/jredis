@@ -5,11 +5,9 @@ import lombok.ToString;
 import org.zy.command.AbstractRedisCommand;
 import org.zy.command.CommandType;
 import org.zy.exception.JredisException;
-import org.zy.redis.RedisDb;
+import org.zy.redis.RedisDbList;
 import org.zy.redis.RedisServer;
 import org.zy.resp.data.SimpleString;
-
-import java.util.List;
 
 @ToString
 public class Client extends AbstractRedisCommand {
@@ -20,7 +18,7 @@ public class Client extends AbstractRedisCommand {
     }
 
     @Override
-    public void handle(ChannelHandlerContext ctx, List<RedisDb> redisDbs) {
+    public void handle(ChannelHandlerContext ctx, RedisDbList redisDbs) {
         String subCommand = getCommandInfo(1);
         switch (subCommand) {
             case "setname" -> {

@@ -1,18 +1,17 @@
 package org.zy.command.impl;
 
 import io.netty.channel.ChannelHandlerContext;
-import lombok.ToString;
 import org.zy.command.CommandType;
 import org.zy.command.RedisCommand;
 import org.zy.redis.RedisDbList;
+import org.zy.redis.RedisServer;
 import org.zy.resp.data.Resp;
 import org.zy.resp.data.SimpleString;
 
-@ToString
-public class Auth implements RedisCommand {
+public class Quit implements RedisCommand {
     @Override
     public CommandType type() {
-        return CommandType.AUTH;
+        return CommandType.QUIT;
     }
 
     @Override
@@ -22,7 +21,9 @@ public class Auth implements RedisCommand {
 
     @Override
     public void handle(ChannelHandlerContext ctx, RedisDbList redisDbs) {
+        // 移除客户端连接
+        RedisServer.removeClient(ctx.channel());
         ctx.writeAndFlush(SimpleString.OK);
+        ctx.close();
     }
-
 }

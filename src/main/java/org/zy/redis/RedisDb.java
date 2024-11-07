@@ -56,7 +56,7 @@ public class RedisDb {
         return dist.asMap().keySet();
     }
 
-    public long exits(String... key) {
+    public long exists(String... key) {
         if (Objects.isNull(key) || key.length == 0) {
             return 0L;
         }
@@ -75,7 +75,7 @@ public class RedisDb {
     }
 
     public long del(String... key) {
-        long count = exits(key);
+        long count = exists(key);
         if (count != 0L) {
             dist.invalidateAll(Arrays.asList(key));
         }
