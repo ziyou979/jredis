@@ -3,6 +3,8 @@ package org.zy.command;
 import lombok.Getter;
 import org.zy.command.impl.*;
 import org.zy.command.impl.string.Get;
+import org.zy.command.impl.string.Mget;
+import org.zy.command.impl.string.Mset;
 import org.zy.command.impl.string.Set;
 import org.zy.exception.JredisException;
 
@@ -24,12 +26,14 @@ public enum CommandType {
     CLIENT("client", "客户端连接", Client::new),
     CONFIG("config", "配置", Config::new),
     GET("get", "获取字符串", Get::new),
+    MGET("mget", "批量获取字符串", Mget::new),
     INFO("info", "获取Redis服务端基础信息", Info::new),
     PING("ping", "心跳检测", Ping::new),
     QUIT("quit", "退出", Quit::new),
     SCAN("scan", "DB扫描", Scan::new),
     SELECT("select", "切换DB", Select::new),
     SET("set", "设置字符串", Set::new),
+    MSET("mset", "批量设置字符串", Mset::new),
     TTL("ttl", "获取剩余时间", Ttl::new),
     TYPE("type", "获取类型", Type::new),
     ;

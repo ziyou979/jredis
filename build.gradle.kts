@@ -16,7 +16,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.34")
     testImplementation(platform("org.junit:junit-bom:5.11.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    implementation("io.netty:netty-all:4.1.113.Final")
+    implementation("io.netty:netty-all:4.1.115.Final")
 }
 
 tasks.test {

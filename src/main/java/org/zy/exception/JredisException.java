@@ -70,5 +70,9 @@ public class JredisException extends RuntimeException {
     public static JredisException invalidValueLength() {
         return new JredisException(1010, JredisExceptionEnum.INVALID_VALUE_LENGTH.getReason());
     }
+
+    public static JredisException invalidSyntax() {
+        return new JredisException(1011, JredisExceptionEnum.INVALID_SYNTAX.getReason());
+    }
 }
 

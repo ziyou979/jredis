@@ -18,7 +18,8 @@ public enum JredisExceptionEnum {
     INVALID_LENGTH("ERR invalid length"),
     INVALID_VALUE("ERR invalid value"),
     INVALID_VALUE_TYPE("ERR invalid value type"),
-    INVALID_VALUE_LENGTH("ERR invalid value length");
+    INVALID_VALUE_LENGTH("ERR invalid value length"),
+    INVALID_SYNTAX("ERR syntax error");
 
 
     private final String reason;
